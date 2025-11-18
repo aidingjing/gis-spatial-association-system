@@ -1,0 +1,50 @@
+{
+  "total_time": 0.0006649494171142578,
+  "passed_tests": 0,
+  "failed_tests": 6,
+  "success_rate": 0.0,
+  "test_results": {
+    "spatial_indexing": {
+      "success": false,
+      "metrics": {
+        "error": "attempted relative import with no known parent package"
+      },
+      "timestamp": 1763475098.2428825
+    },
+    "memory_management": {
+      "success": false,
+      "metrics": {
+        "error": "attempted relative import with no known parent package"
+      },
+      "timestamp": 1763475098.243005
+    },
+    "parallel_processing": {
+      "success": false,
+      "metrics": {
+        "error": "attempted relative import with no known parent package"
+      },
+      "timestamp": 1763475098.2431362
+    },
+    "caching_system": {
+      "success": false,
+      "metrics": {
+        "error": "attempted relative import with no known parent package"
+      },
+      "timestamp": 1763475098.2432342
+    },
+    "performance_monitoring": {
+      "success": false,
+      "metrics": {
+        "error": "attempted relative import with no known parent package"
+      },
+      "timestamp": 1763475098.2433236
+    },
+    "integration_test": {
+      "success": false,
+      "metrics": {
+        "error": "attempted relative import with no known parent package"
+      },
+      "timestamp": 1763475098.2434127
+    }
+  }
+}
