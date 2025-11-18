@@ -6,8 +6,9 @@ GIS空间关联分析系统
 - 线-线相交检测分析
 - 线-面包含判断分析
 - 坐标系转换处理
+- 全面的数据质量验证和修复
 
-技术栈：Python + GeoPandas + Shapely + Rtree
+技术栈：Python + GeoPandas + Shapely + Rtree + PyProj
 """
 
 __version__ = "1.0.0"
@@ -47,6 +48,19 @@ except ImportError as e:
     _HAS_TRANSFORMATION = False
     logging.warning(f"坐标转换模块不可用: {e}")
 
+# 数据验证模块导入
+try:
+    from .validation import (
+        GeometryValidator, AttributeValidator, CoordinateSystemValidator,
+        DataQualityScorer, DataRepairer
+    )
+    _HAS_VALIDATION = True
+except ImportError as e:
+    GeometryValidator = AttributeValidator = CoordinateSystemValidator = None
+    DataQualityScorer = DataRepairer = None
+    _HAS_VALIDATION = False
+    logging.warning(f"数据验证模块不可用: {e}")
+
 # 动态构建__all__列表
 __all__ = []
 if _HAS_ASSOCIATION:
@@ -57,3 +71,6 @@ if _HAS_CONTAINMENT:
     __all__.append('PolygonContainmentAnalyzer')
 if _HAS_TRANSFORMATION:
     __all__.append('CoordinateTransformer')
+if _HAS_VALIDATION:
+    __all__.extend(['GeometryValidator', 'AttributeValidator', 'CoordinateSystemValidator',
+                    'DataQualityScorer', 'DataRepairer'])
