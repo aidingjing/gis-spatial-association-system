@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""
+GIS空间关联分析系统 - 命令行入口脚本
+
+使用方法:
+    gis-association --help                    # 显示帮助信息
+    gis-association process file1.shp file2.shp  # 执行分析
+    gis-association interactive                 # 交互式模式
+    gis-association config --help               # 配置管理
+"""
+
+import sys
+import os
+
+# 添加项目路径到Python路径
+project_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, project_root)
+
+try:
+    from gis_spatial_association.cli.main import main
+    main()
+except ImportError as e:
+    print(f"错误: 无法导入GIS空间关联分析系统: {e}")
+    print("请确保已正确安装所有依赖包")
+    sys.exit(1)
+except KeyboardInterrupt:
+    print("\n操作被用户中断")
+    sys.exit(130)
+except Exception as e:
+    print(f"程序执行出错: {e}")
+    sys.exit(1)

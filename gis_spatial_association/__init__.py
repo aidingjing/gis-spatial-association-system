@@ -15,13 +15,14 @@ __version__ = "1.0.0"
 __author__ = "CCPM Auto Development System"
 
 # 可选依赖导入，优雅地处理缺失依赖
+import logging
+
 try:
     from .algorithms.association import NearestNeighborAssociator
     _HAS_ASSOCIATION = True
 except ImportError as e:
     NearestNeighborAssociator = None
     _HAS_ASSOCIATION = False
-    import logging
     logging.warning(f"关联分析模块不可用: {e}")
 
 try:
@@ -61,6 +62,16 @@ except ImportError as e:
     _HAS_VALIDATION = False
     logging.warning(f"数据验证模块不可用: {e}")
 
+# CLI模块导入
+try:
+    from .cli import main, ProgressMonitor, InteractiveMode, ConfigManager
+    _HAS_CLI = True
+except ImportError as e:
+    main = ProgressMonitor = InteractiveMode = ConfigManager = None
+    _HAS_CLI = False
+    import logging
+    logging.warning(f"CLI模块不可用: {e}")
+
 # 动态构建__all__列表
 __all__ = []
 if _HAS_ASSOCIATION:
@@ -74,3 +85,5 @@ if _HAS_TRANSFORMATION:
 if _HAS_VALIDATION:
     __all__.extend(['GeometryValidator', 'AttributeValidator', 'CoordinateSystemValidator',
                     'DataQualityScorer', 'DataRepairer'])
+if _HAS_CLI:
+    __all__.extend(['main', 'ProgressMonitor', 'InteractiveMode', 'ConfigManager'])
